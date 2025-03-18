@@ -18,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.assessment.layoutmodifier.ui.theme.LayoutModifierTheme
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.Alignment
 import kotlin.math.roundToInt
 
 /*
@@ -57,7 +59,6 @@ fun Modifier.exampleLayout(x: Int, y: Int) =
                         placeable.placeRelative(x, y)
                 }
     }
-
 */
 
 // the child element positioning based on any horizontal or vertical alignment line
@@ -97,12 +98,33 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.size(120.dp, 80.dp)) {
-        ColorBox(
-            Modifier
-                .exampleLayout(90, 50)
-                .background(Color.Blue)
-        )
+//    Box(modifier = modifier.size(120.dp, 80.dp)) {
+//        ColorBox(
+//            Modifier
+//                .exampleLayout(90, 50)
+//                .background(Color.Blue)
+//        )
+//    }
+    // custom layout with fraction positioning (the vertical alignment line) of the child
+    Box(contentAlignment = Alignment.Center,
+        modifier = modifier.size(120.dp, 80.dp)) {
+        Column {
+            ColorBox(
+                Modifier.exampleLayout(0f).background(Color.Blue)
+            )
+            ColorBox(
+                Modifier.exampleLayout(0.25f).background(Color.Green)
+            )
+            ColorBox(
+                Modifier.exampleLayout(0.5f).background(Color.Yellow)
+            )
+            ColorBox(
+                Modifier.exampleLayout(0.25f).background(Color.Red)
+            )
+            ColorBox(
+                Modifier.exampleLayout(0.0f).background(Color.Magenta)
+            )
+        }
     }
 }
 
